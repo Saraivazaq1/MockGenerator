@@ -2,6 +2,7 @@
 
 from faker import Faker
 import random
+import csv
 
 # Instância do Faker
 fake = Faker()
@@ -24,13 +25,19 @@ def gerarCpf():
     return f'{''.join(map(str, cpf))}'
 
 # Geração de uma linha no arquivo .csv
-def gerarLinha():
-    linha = []
-    linha.append(fake.name())
-    linha.append(gerarCpf())
-    linha.append(fake.date_of_birth().strftime("%d/%m/%Y"))
-    linha.append(fake.phone_number())
-    linha.append(fake.address())
-    linha.append(fake.safe_email())
-    
-    informacoesArquivo.append(linha)
+def gerarArquivo():
+
+    for x in range(10):
+        nome = fake.name()
+        cpf = gerarCpf()
+        dataNascimento = fake.date_of_birth().strftime("%d/%m/%Y")
+        telefone = fake.phone_number()
+        endereco = fake.address()
+        email = fake.email()
+        
+        informacoesArquivo.append([nome, cpf, dataNascimento, telefone, endereco, email])
+
+    with open("mockInfo.csv", "w", newline="") as file:
+        writer = csv.writer(file)
+        writer.writerow(['Nome', 'CPF', 'Data de nascimento', 'Telefone', 'Endereço', 'Email'])
+        writer.writerows(informacoesArquivo)
