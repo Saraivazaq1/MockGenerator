@@ -2,6 +2,7 @@
 
 from app.functions import gerarLinha, informacoesArquivo
 from os import system, name
+import csv
 
 # TODO: Disponibilizar o download de um arquivo csv com as informações geradas
 # TODO: Comentar o código, fazer ajustes de formatação e otimizar
@@ -25,6 +26,11 @@ while True:
             for x in range(linhasNum):
                 gerarLinha()
                 print(informacoesArquivo[x])
+
+            # Criando o arquivo .csv com as informações geradas
+            with open("mockInfo.csv", "w", newline="") as f:
+                writer = csv.writer(f)
+                writer.writerows(informacoesArquivo)
 
         case "2":
             break
