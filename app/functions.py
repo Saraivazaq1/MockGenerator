@@ -2,7 +2,6 @@
 
 from faker import Faker
 import random
-import csv
 
 # Instância do Faker
 fake = Faker()
@@ -37,7 +36,3 @@ def gerarArquivo():
         
         informacoesArquivo.append([nome, cpf, dataNascimento, telefone, endereco, email])
 
-    with open("mockInfo.csv", "w", newline="") as file:
-        writer = csv.writer(file)
-        writer.writerow(['Nome', 'CPF', 'Data de nascimento', 'Telefone', 'Endereço', 'Email'])
-        writer.writerows(informacoesArquivo)
